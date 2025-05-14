@@ -1,4 +1,4 @@
-**DISCLAIMER: This bug was previously issued in https://github.com/kubernetes-sigs/aws-load-balancer-controller/issues/3979, but due to business priorities company does not have workforce to supply reproduction code.** This issue is a followup to it, with link to code: https://github.com/matisiekpl/elb-eks-unhealthy-targets/
+**DISCLAIMER: This bug was previously issued in https://github.com/kubernetes-sigs/aws-load-balancer-controller/issues/3979, but due to business priorities company does not had workforce to supply reproduction code.** This issue is a followup to it, with link to code: https://github.com/matisiekpl/elb-eks-unhealthy-targets/
 
 **Bug Description**
 I'm trying to deploy web application with pretty standard stack, that contains deployment, service and ingress. We are using 3 worker nodes on EKS, and when I scale replicas to at least 2, Load Balancer UI shows that targets randomly goes unhealthy. Also app responds with 504 Gateway timed out every few requests. It seems that traffic goes only to one pod/worker node, completely ignoring routing to other pods on other nodes.
@@ -29,16 +29,12 @@ No workarounds available
 - Using EKS (yes/no), if so version?: eks.25
 - Using Service or Ingress: Ingress
 - AWS region: us-west-1
-- How was the aws-load-balancer-controller installed:
-    - If helm was used then please show output of `helm ls -A | grep -i aws-load-balancer-controller`
-    - If helm was used then please show output of `helm -n <controllernamespace> get values <helmreleasename>`
-    - If helm was not used, then copy/paste the exact command used to install the controller, including flags and options.
-- Current state of the Controller configuration:
-    - `kubectl -n <controllernamespace> describe deployment aws-load-balancer-controller`
+- How was the aws-load-balancer-controller installed: https://github.com/matisiekpl/elb-eks-unhealthy-targets/blob/master/helm.log
+- Current state of the Controller configuration: https://github.com/matisiekpl/elb-eks-unhealthy-targets/blob/master/ctrl.log
 - Current state of the Ingress/Service configuration:
-    - `kubectl describe ingressclasses`
-    - `kubectl -n <appnamespace> describe ingress <ingressname>`
-    - `kubectl -n <appnamespace> describe svc <servicename>`
+    - Ingress Class: https://github.com/matisiekpl/elb-eks-unhealthy-targets/blob/master/ingcls.log
+    - Ingress: https://github.com/matisiekpl/elb-eks-unhealthy-targets/blob/master/ing.log
+    - Service: https://github.com/matisiekpl/elb-eks-unhealthy-targets/blob/master/svc.log
 
 **Possible Solution (Optional)**
 No idea
