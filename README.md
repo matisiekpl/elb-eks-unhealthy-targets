@@ -11,13 +11,22 @@ How to launch this reproducible setup?
 1. Run `setup.sh`
 2. Wait a few minutes
 3. Grab DNS Endpoint from ALB from AWS Console
-4. Make ~200 curls every second to this endpoint or fill endpoint in `measure.js` and run it.
+4. Make ~300 curls every second to this endpoint or fill endpoint in `measure.js` and run it.
 
-Expected results:
+```bash
+for i in `seq 1 300`; do curl -H 'Host: example.customdomain.com' <ENDPOINT> ; done
+```
+
+**Expected results:**
+
 User should see 200 response codes for each request
 ALB Web Console should report that all three targets are healthy.
 
-Actual results:
+**Actual results:**
+
 Some requests are returned correctly instantly, but some of them are timing out returning 504 (~10% of them).
 ALB Web Console reports that ALB targets randomly go unhealthy. There are moments where all targets are healthy. Also,
 there are moments where all targets are unhealthy. Most of the time 1–2 nodes of out three are unhealthy.
+
+![alb.png](alb2.png)
+![curl.png](curl.png)
