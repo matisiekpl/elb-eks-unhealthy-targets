@@ -1,0 +1,8 @@
+➜  elb-eks-unhealthy-targets helm ls -A | grep -i aws-load-balancer-controller
+aws-load-balancer-controller	kube-system	1       	2025-05-14 14:23:10.06034 +0200 CEST 	deployed	aws-load-balancer-controller-1.13.0	v2.13.0
+➜  elb-eks-unhealthy-targets helm -n  kube-system get values aws-load-balancer-controller
+USER-SUPPLIED VALUES:
+clusterName: cluster-bug
+serviceAccount:
+  create: false
+  name: aws-load-balancer-controller

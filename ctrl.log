@@ -1,0 +1,54 @@
+Name:                   aws-load-balancer-controller
+Namespace:              kube-system
+CreationTimestamp:      Wed, 14 May 2025 14:23:30 +0200
+Labels:                 app.kubernetes.io/instance=aws-load-balancer-controller
+                        app.kubernetes.io/managed-by=Helm
+                        app.kubernetes.io/name=aws-load-balancer-controller
+                        app.kubernetes.io/version=v2.13.0
+                        helm.sh/chart=aws-load-balancer-controller-1.13.0
+Annotations:            deployment.kubernetes.io/revision: 1
+                        meta.helm.sh/release-name: aws-load-balancer-controller
+                        meta.helm.sh/release-namespace: kube-system
+Selector:               app.kubernetes.io/instance=aws-load-balancer-controller,app.kubernetes.io/name=aws-load-balancer-controller
+Replicas:               2 desired | 2 updated | 2 total | 2 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:           app.kubernetes.io/instance=aws-load-balancer-controller
+                    app.kubernetes.io/name=aws-load-balancer-controller
+  Annotations:      prometheus.io/port: 8080
+                    prometheus.io/scrape: true
+  Service Account:  aws-load-balancer-controller
+  Containers:
+   aws-load-balancer-controller:
+    Image:       public.ecr.aws/eks/aws-load-balancer-controller:v2.13.0
+    Ports:       9443/TCP, 8080/TCP
+    Host Ports:  0/TCP, 0/TCP
+    Args:
+      --cluster-name=cluster-bug
+      --ingress-class=alb
+    Liveness:     http-get http://:61779/healthz delay=30s timeout=10s period=10s #success=1 #failure=2
+    Readiness:    http-get http://:61779/readyz delay=10s timeout=10s period=10s #success=1 #failure=2
+    Environment:  <none>
+    Mounts:
+      /tmp/k8s-webhook-server/serving-certs from cert (ro)
+  Volumes:
+   cert:
+    Type:               Secret (a volume populated by a Secret)
+    SecretName:         aws-load-balancer-tls
+    Optional:           false
+  Priority Class Name:  system-cluster-critical
+  Node-Selectors:       <none>
+  Tolerations:          <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   aws-load-balancer-controller-88cd9ffd6 (2/2 replicas created)
+Events:
+  Type    Reason             Age    From                   Message
+  ----    ------             ----   ----                   -------
+  Normal  ScalingReplicaSet  4m57s  deployment-controller  Scaled up replica set aws-load-balancer-controller-88cd9ffd6 to 2

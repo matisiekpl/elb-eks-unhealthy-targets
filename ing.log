@@ -1,0 +1,21 @@
+Name:             app-example
+Labels:           <none>
+Namespace:        example
+Address:          lb-eks-bug-1923358361.us-west-1.elb.amazonaws.com
+Ingress Class:    alb
+Default backend:  <default>
+Rules:
+  Host                      Path  Backends
+  ----                      ----  --------
+  example.customdomain.com
+                            /   app-example:80 (10.1.2.162:80,10.1.2.209:80,10.1.1.229:80 + 3 more...)
+Annotations:                alb.ingress.kubernetes.io/group.name: main
+                            alb.ingress.kubernetes.io/listen-ports: [{"HTTP":80}]
+                            alb.ingress.kubernetes.io/load-balancer-attributes: idle_timeout.timeout_seconds=3600
+                            alb.ingress.kubernetes.io/load-balancer-name: lb-eks-bug
+                            alb.ingress.kubernetes.io/scheme: internet-facing
+                            kubernetes.io/ingress.class: alb
+Events:
+  Type    Reason                  Age    From     Message
+  ----    ------                  ----   ----     -------
+  Normal  SuccessfullyReconciled  2m36s  ingress  Successfully reconciled

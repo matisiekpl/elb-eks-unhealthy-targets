@@ -1,0 +1,18 @@
+Name:                     app-example
+Namespace:                example
+Labels:                   app=app-example
+Annotations:              <none>
+Selector:                 app=app-example
+Type:                     NodePort
+IP Family Policy:         SingleStack
+IP Families:              IPv4
+IP:                       172.20.218.138
+IPs:                      172.20.218.138
+Port:                     <unset>  80/TCP
+TargetPort:               80/TCP
+NodePort:                 <unset>  32733/TCP
+Endpoints:                10.1.2.162:80,10.1.2.209:80,10.1.1.229:80 + 3 more...
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Internal Traffic Policy:  Cluster
+Events:                   <none>

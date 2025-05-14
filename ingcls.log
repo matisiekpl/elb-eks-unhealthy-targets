@@ -1,0 +1,10 @@
+Name:         alb
+Labels:       app.kubernetes.io/instance=aws-load-balancer-controller
+              app.kubernetes.io/managed-by=Helm
+              app.kubernetes.io/name=aws-load-balancer-controller
+              app.kubernetes.io/version=v2.13.0
+              helm.sh/chart=aws-load-balancer-controller-1.13.0
+Annotations:  meta.helm.sh/release-name: aws-load-balancer-controller
+              meta.helm.sh/release-namespace: kube-system
+Controller:   ingress.k8s.aws/alb
+Events:       <none>
